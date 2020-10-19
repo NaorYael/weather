@@ -1,0 +1,8 @@
+<div class="forecasts">
+  <div class="forecast" *ngFor="let forecast of favArr;">
+    <div class="title"> {{forecast.cityName}}</div>
+    <div class="phrase"> {{forecast.headLine}}</div>
+    <div class="temperature"> {{forecast.temperature.Maximum.Value}}</div>
+    <img src="{{forecast.icon | accuweatherIcon }}"/>
+  </div>
+</div>

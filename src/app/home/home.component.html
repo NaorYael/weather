@@ -1,0 +1,148 @@
+<input type="text" class="autoComplete" placeholder="Search..."
+       [ngModel]="autoCompleteValue"
+       (input)="autoCompleteInput.next($event.target.value)">
+
+<div class="autocomplete-suggestions" *ngIf="autoCompletedSuggestions">
+  <div class="suggestion" *ngFor="let suggestion of autoCompletedSuggestions" (click)="selectSuggestion(suggestion)">
+    {{suggestion.LocalizedName}}, {{suggestion.Country.LocalizedName}}
+  </div>
+</div>
+
+
+<div class="title">
+  <div class="name">{{cityName}}</div>
+  <div class="headLine">{{headLine}}</div>
+</div>
+
+<button class="fav" *ngIf="cityName" (click)="toggleFavorites()">{{favState}}Add To Favorites</button>
+
+
+<div class="forecasts">
+  <div class="forecast" *ngFor="let forecast of forecasts;">
+    <div class="date">{{forecast.Date | date: 'fullDate'}}</div>
+    <div class="phrase"> {{forecast.Day.IconPhrase}}</div>
+    <div class="temperature"> {{forecast.Temperature.Minimum.Value}}{{forecast.Temperature.Minimum.Unit}}
+      - {{forecast.Temperature.Maximum.Value }}{{forecast.Temperature.Maximum.Unit}}</div>
+    <img src="{{forecast.Day.Icon | accuweatherIcon }}"/>
+  </div>
+</div>
+
+
+<!--<div class="search">-->
+<!--<mat-form-field>-->
+<!--    <input class="autoComplete" matInput type="text" placeholder="Search City" [formControl]="myControl" [matAutocomplete]="auto">-->
+<!--    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">-->
+<!--      <mat-option  *ngFor="let item of options" (click)="onItemClick(item)">-->
+<!--        {{ item.LocalizedName }} , {{ item.Country.LocalizedName}}-->
+<!--      </mat-option>-->
+<!--    </mat-autocomplete>-->
+<!--  </mat-form-field>-->
+<!--</div>-->
+
+
+<!--<div class="daily">-->
+<!--  <div *ngIf="weather || weathers">-->
+<!--    <div class="container">-->
+<!--      <div class="text-right" *ngIf="weather">-->
+<!--        <button type="button" class="btn btn-primary add" (click)="onSave(weather, cityName)">-->
+<!--          Add to Favorites-->
+<!--        </button>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; For Home page &ndash;&gt;-->
+<!--      <div class="card h-100 text-center daily-card" *ngIf="weather && cityName">-->
+<!--        <h2 *ngIf="cityName" class="card-body field-margin">{{ cityName }}</h2>-->
+<!--        <h1 *ngIf="weather" class="text-center font-weight-bold field">{{weather.WeatherText}}-->
+<!--          <app-thumbnail imageSource="{{weather.WeatherIcon | iconPipe }}"></app-thumbnail>-->
+<!--        </h1>-->
+<!--        <h1 *ngIf="autoRenew? weather : null"-->
+<!--            class="text-center font-weight-bold field-margin">{{weather.Temperature.Metric.Value}} °C</h1>-->
+<!--        <h1 *ngIf="!autoRenew? weather : null"-->
+<!--            class="text-center font-weight-bold field-margin">{{weather.Temperature.Imperial.Value }} °F</h1>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; For Favorites &ndash;&gt;-->
+<!--      <div class="card h-100 cell">-->
+<!--        <div *ngIf="weathers">-->
+<!--          <div *ngFor="let weatherNcity of weathers" class="card h-100 text-center favorites">-->
+<!--            <h2 class="card-body text-center field">{{ weatherNcity.cityName }}</h2>-->
+<!--            <h1 class="text-center font-weight-bold field">{{weatherNcity.weather.WeatherText}}</h1>-->
+<!--            <h1 *ngIf="autoRenew? weatherNcity : null"-->
+<!--                class="text-center font-weight-bold field-margin">{{weatherNcity.weather.Temperature.Metric.Value}}-->
+<!--              °C</h1>-->
+<!--            <h1 *ngIf="!autoRenew? weatherNcity : null"-->
+<!--                class="text-center font-weight-bold field-margin">{{weatherNcity.weather.Temperature.Imperial.Value }}-->
+<!--              °F</h1>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<div class="container">-->
+<!--  <div class="row">-->
+
+<!--    <div class="card h-100 cell">-->
+<!--      <h1 class="card-body text-center">Sun</h1>-->
+<!--      <div class="text-center">-->
+<!--        <app-thumbnail imageSource="{{weather.DailyForecasts[0].Day.Icon | iconPipe }}"></app-thumbnail>-->
+<!--      </div>-->
+<!--      <div *ngIf="autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[0].Temperature.Minimum.Value | temperatureConverter: 'C' }}-->
+<!--        °C {{ weather.WeatherIcon }}</p></div>-->
+<!--      <div *ngIf="!autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[0].Temperature.Minimum.Value  }} °F</p></div>-->
+<!--    </div>-->
+
+<!--    <div class="card h-100 cell">-->
+<!--      <h1 class="card-body text-center">Mon</h1>-->
+<!--      <div class="text-center">-->
+<!--        <app-thumbnail imageSource="{{weather.DailyForecasts[1].Day.Icon | iconPipe }}"></app-thumbnail>-->
+<!--      </div>-->
+<!--      <div *ngIf="autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[1].Temperature.Maximum.Value | temperatureConverter: 'C' }}-->
+<!--        °C {{ weather.WeatherIcon }}</p></div>-->
+<!--      <div *ngIf="!autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[1].Temperature.Maximum.Value  }} °F</p></div>-->
+<!--    </div>-->
+
+<!--    <div class="card h-100 cell">-->
+<!--      <h1 class="card-body text-center">Tue</h1>-->
+<!--      <div class="text-center">-->
+<!--        <app-thumbnail imageSource="{{weather.DailyForecasts[2].Day.Icon | iconPipe }}"></app-thumbnail>-->
+<!--      </div>-->
+<!--      <div *ngIf="autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[2].Temperature.Minimum.Value | temperatureConverter: 'C' }}-->
+<!--        °C {{ weather.WeatherIcon }}</p></div>-->
+<!--      <div *ngIf="!autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[2].Temperature.Minimum.Value  }} °F</p></div>-->
+<!--    </div>-->
+
+<!--    <div class="card h-100 cell">-->
+<!--      <h1 class="card-body text-center">Wed</h1>-->
+<!--      <div class="text-center">-->
+<!--        <app-thumbnail imageSource="{{weather.DailyForecasts[3].Day.Icon | iconPipe }}"></app-thumbnail>-->
+<!--      </div>-->
+<!--      <div *ngIf="autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[3].Temperature.Maximum.Value | temperatureConverter: 'C' }}-->
+<!--        °C {{ weather.WeatherIcon }}</p></div>-->
+<!--      <div *ngIf="!autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[3].Temperature.Maximum.Value  }} °F</p></div>-->
+<!--    </div>-->
+
+<!--    <div class="card h-100 cell">-->
+<!--      <h1 class="card-body text-center">Thu</h1>-->
+<!--      <div class="text-center">-->
+<!--        <app-thumbnail imageSource="{{weather.DailyForecasts[4].Day.Icon | iconPipe }}"></app-thumbnail>-->
+<!--      </div>-->
+<!--      <div *ngIf="autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[4].Temperature.Minimum.Value | temperatureConverter: 'C' }}-->
+<!--        °C {{ weather.WeatherIcon }}</p></div>-->
+<!--      <div *ngIf="!autoRenew? weather : null"><p-->
+<!--        class="card-body text-center">{{weather.DailyForecasts[4].Temperature.Minimum.Value  }} °F</p></div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</div>-->

@@ -1,0 +1,24 @@
+@import "../styles/shared";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.forecasts {
+  @include forecastsStyles;
+  display: block;
+
+  .forecast {
+    margin-right: 15px;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .forecasts {
+    display: inline-block;
+  }
+}
