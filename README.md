@@ -1,27 +1,19 @@
-# Weather
+# WeatherSearch
+Search for weathers with [AccuWeather API](https://developer.accuweather.com//).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+## Description
+Search your favourite weathers and save them to Favourites.
 
-## Development server
+# Deployment
+ This App is deployed on Firebase: [Live Demo](https://weather-19181.firebaseapp.com/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Built With
+* [Angular CLI](https://cli.angular.io//) - The framework used.
 
-## Code scaffolding
+ # Screenshot
+<img src="https://user-images.githubusercontent.com/47955339/96555566-9b181680-12c0-11eb-8012-18d3d53e7533.png" width:50>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Author
+Naor Yael
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+NOTE: this API is limited to 50 requests per day.
